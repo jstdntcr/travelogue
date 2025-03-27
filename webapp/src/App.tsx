@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
+  const reviews = [
+    {
+      nick: 'cool-review-1',
+      name: 'review 1',
+      description: 'review 1 description',
+    },
+    {
+      nick: 'cool-review-2',
+      name: 'review 2',
+      description: 'review 2 description',
+    },
+    {
+      nick: 'cool-review-3',
+      name: 'review 3',
+      description: 'review 3 description',
+    },
+    {
+      nick: 'cool-review-4',
+      name: 'review 4',
+      description: 'review 4 description',
+    },
+    {
+      nick: 'cool-review-5',
+      name: 'review 5',
+      description: 'review 5 description',
+    },
+  ];
 
   return (
-    <>
+    <div>
+      <h1>Travelogue</h1>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {reviews.map((review) => {
+          return (
+            <div key={review.nick}>
+              <h2>{review.name}</h2>
+              <p>{review.description}</p>
+            </div>
+          );
+        })}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+    </div>
+  );
+};
