@@ -1,5 +1,5 @@
 {
-  "name": "webapp",
+  "name": "@travelogue/webapp",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,10 @@
     "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'"
   },
   "dependencies": {
+    "@travelogue/backend": "workspace:*",
+    "@tanstack/react-query": "^5.71.5",
+    "@trpc/client": "^11.0.2",
+    "@trpc/react-query": "^11.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
