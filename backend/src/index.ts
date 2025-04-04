@@ -1,9 +1,12 @@
 import express from 'express';
 import * as trpcExpress from '@trpc/server/adapters/express';
 import { routerTRPC } from './trpc';
+import cors from 'cors';
 
 const expressApp = express();
-const PORT = 8080;
+const PORT = 3000;
+
+expressApp.use(cors());
 
 expressApp.use(
   '/trpc',
@@ -13,5 +16,5 @@ expressApp.use(
 );
 
 expressApp.listen(PORT, () => {
-  console.log(`Server is running on port http://localhost:${PORT}`);
+  console.info(`Server is running on port http://localhost:${PORT}`);
 });
