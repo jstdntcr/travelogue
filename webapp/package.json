@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "types": "tsc --noEmit --project tsconfig.app.json && tsc --noEmit --project tsconfig.node.json",
     "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts ."
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts .",
+    "prepare": "husky init"
   },
   "dependencies": {
     "@travelogue/backend": "workspace:*",
