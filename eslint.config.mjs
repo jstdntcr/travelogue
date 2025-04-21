@@ -1,31 +1,48 @@
-import tseslint from 'typescript-eslint'
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import importPlugin from 'eslint-plugin-import';
 
-export default tseslint.config(
-  { ignores: ['dist', 'node_modules'] },
+export default [
   {
-    extends: [...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylisticTypeChecked],
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.ts'],
     languageOptions: {
-      ecmaVersion: 'latest',
+      parser: tsParser,
       parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
+        ecmaVersion: 'latest',
+        sourceType: 'module',
       },
     },
+    plugins: {
+      import: importPlugin,
+      '@typescript-eslint': tsPlugin,
+    },
     rules: {
-      'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
-      'no-duplicate-imports': ['error', { includeExports: true }],
-      "@typescript-eslint/restrict-template-expressions": ["error", { "allowNumber": true }],
-      'sort-imports': [
+      'sort-imports': 'off', // Disable sort-imports since we're using import/order
+      'import/order': [
         'error',
         {
-          ignoreCase: false,
-          ignoreDeclarationSort: false,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ['none', 'single', 'multiple', 'all'],
-          allowSeparatedGroups: false,
+          // Group imports to match ['none', 'single', 'multiple', 'all']
+          groups: [
+            ['builtin', 'external'], // 'none', 'single', 'multiple' (default and named imports from external modules)
+            ['internal', 'parent', 'sibling', 'index'], // Local imports
+          ],
+          // Handle 'all' (namespace imports) by ensuring they come last within each group
+          pathGroups: [
+            {
+              pattern: '{*,**/*}', // Matches namespace imports (e.g., import * as module)
+              group: 'external',
+              position: 'after', // Place namespace imports after other external imports
+            },
+          ],
+          'newlines-between': 'never', // No blank lines between import groups
+          alphabetize: {
+            order: 'asc', // Sort alphabetically
+            caseInsensitive: false, // Case-sensitive sorting
+          },
         },
       ],
+      'import/named': 'error', // Enforce sorting of named imports (e.g., import { b, a } -> import { a, b })
+      'no-console': ['error', { allow: ['error', 'info', 'warn'] }],
     },
-  }
-)
+  },
+];

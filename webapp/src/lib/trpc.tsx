@@ -1,7 +1,7 @@
-import { AppRouter } from '@travelogue/backend/src/trpc';
-import { createTRPCReact } from '@trpc/react-query';
 import { QueryClient } from '@tanstack/react-query';
+import { AppRouter } from '@travelogue/backend/src/trpc';
 import { httpBatchLink } from '@trpc/client';
+import { createTRPCReact } from '@trpc/react-query';
 
 export const trpc = createTRPCReact<AppRouter>();
 
