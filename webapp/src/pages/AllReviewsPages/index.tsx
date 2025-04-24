@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { getViewReviewRoute } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 
 export const AllReviewsPages = () => {
@@ -13,7 +15,9 @@ export const AllReviewsPages = () => {
       <div className="reviews-container">
         {data?.reviews.map((review) => (
           <div className="review-card" key={review.nick}>
-            <h3>{review.name}</h3>
+            <h3>
+              <Link to={getViewReviewRoute({ reviewNick: review.nick })}>{review.name}</Link>
+            </h3>
             <p>{review.description}</p>
           </div>
         ))}

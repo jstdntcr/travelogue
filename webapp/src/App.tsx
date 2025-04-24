@@ -1,10 +1,18 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { getAllReviewsRoute, getViewReviewRoute } from './lib/routes';
 import { TRPCProvider } from './lib/trpc';
 import { AllReviewsPages } from './pages/AllReviewsPages';
+import { ViewReviewPage } from './pages/ViewReviewPage';
 
 export const App = () => {
   return (
     <TRPCProvider>
-      <AllReviewsPages />
+      <BrowserRouter>
+        <Routes>
+          <Route path={getAllReviewsRoute()} element={<AllReviewsPages />} />
+          <Route path={getViewReviewRoute({ reviewNick: ':reviewNick' })} element={<ViewReviewPage />} />
+        </Routes>
+      </BrowserRouter>
     </TRPCProvider>
   );
 };
