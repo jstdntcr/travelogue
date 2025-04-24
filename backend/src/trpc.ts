@@ -1,38 +1,18 @@
 import { initTRPC } from '@trpc/server';
+import _ from 'lodash';
 
-const reviews = [
-  {
-    nick: 'cool-review-1',
-    name: 'review 1',
-    description: 'review 1 description',
-  },
-  {
-    nick: 'cool-review-2',
-    name: 'review 2',
-    description: 'review 2 description',
-  },
-  {
-    nick: 'cool-review-3',
-    name: 'review 3',
-    description: 'review 3 description',
-  },
-  {
-    nick: 'cool-review-4',
-    name: 'review 4',
-    description: 'review 4 description',
-  },
-  {
-    nick: 'cool-review-5',
-    name: 'review 5',
-    description: 'review 5 description',
-  },
-];
+const reviews = _.times(100, (i) => ({
+  nick: `cool-review-${i}`,
+  name: `review ${i}`,
+  description: `review ${i} description`,
+  text: _.times(100, (j) => `<p>Text paragraph of review ${i} and paragraph ${j}</p>`).join(''),
+}));
 
 const trpc = initTRPC.create();
 
 export const routerTRPC = trpc.router({
   getReviews: trpc.procedure.query(() => {
-    return { reviews };
+    return { reviews: reviews.map((review) => _.pick(review, ['nick', 'name', 'description'])) };
   }),
 });
 
