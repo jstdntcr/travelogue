@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
+import { ViewReviewRouteParams } from '../../lib/routes';
 
 export const ViewReviewPage = () => {
-  const { reviewNick } = useParams() as { reviewNick: string };
+  const { reviewNick } = useParams() as ViewReviewRouteParams;
 
   return (
     <div>
