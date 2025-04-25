@@ -10,7 +10,6 @@ export const AllReviewsPages = () => {
 
   return (
     <div>
-      <h1>Travelogue</h1>
       <h2>All Reviews</h2>
       <div className="reviews-container">
         {data?.reviews.map((review) => (
