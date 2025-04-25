@@ -4,6 +4,7 @@ import { getAllReviewsRoute, getViewReviewRoute, viewReviewRouteParams } from '.
 import { TRPCProvider } from './lib/trpc';
 import { AllReviewsPages } from './pages/AllReviewsPages';
 import { ViewReviewPage } from './pages/ViewReviewPage';
+import './styles/global.scss';
 
 export const App = () => {
   return (

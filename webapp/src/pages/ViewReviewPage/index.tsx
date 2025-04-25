@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import css from './index.module.scss';
 import { ViewReviewRouteParams } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 
@@ -13,9 +14,9 @@ export const ViewReviewPage = () => {
 
   return (
     <div>
-      <h1>{data.review.name}</h1>
-      <p>{data.review.description}</p>
-      <div dangerouslySetInnerHTML={{ __html: data.review.text }} />
+      <h1 className={css.title}>{data.review.name}</h1>
+      <p className={css.description}>{data.review.description}</p>
+      <div className={css.text} dangerouslySetInnerHTML={{ __html: data.review.text }} />
     </div>
   );
 };

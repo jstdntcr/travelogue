@@ -4,8 +4,8 @@ import z from 'zod';
 
 const reviews = _.times(100, (i) => ({
   nick: `cool-review-${i}`,
-  name: `review ${i}`,
-  description: `review ${i} description`,
+  name: `Review ${i}`,
+  description: `Description of review ${i}`,
   text: _.times(100, (j) => `<p>Text paragraph ${j} of review ${i}</p>`).join(''),
 }));
 

@@ -1,0 +1,30 @@
+@import '../../styles/_mixins.scss';
+@import '../../styles/_vars.scss';
+
+.title {
+  @include h1;
+}
+
+.reviews {
+  .review {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid $black;
+    border-radius: 10px;
+    & + .review {
+      margin-top: 20px;
+    }
+
+    .reviewName {
+      @include h2;
+    }
+
+    .reviewLink {
+      @include link;
+    }
+
+    .reviewDescription {
+      font-size: 18px;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import css from './index.module.scss';
 import { getViewReviewRoute } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 
@@ -10,14 +11,14 @@ export const AllReviewsPages = () => {
 
   return (
     <div>
-      <h2>All Reviews</h2>
-      <div className="reviews-container">
+      <h1 className={css.title}>All Reviews</h1>
+      <div className={css.reviews}>
         {data?.reviews.map((review) => (
-          <div className="review-card" key={review.nick}>
-            <h3>
-              <Link to={getViewReviewRoute({ reviewNick: review.nick })}>{review.name}</Link>
-            </h3>
-            <p>{review.description}</p>
+          <div className={css.review} key={review.nick}>
+            <h2 className={css.reviewName}>
+              <Link className={css.reviewLink} to={getViewReviewRoute({ reviewNick: review.nick })}>{review.name}</Link>
+            </h2>
+            <p className={css.reviewDescription}>{review.description}</p>
           </div>
         ))}
       </div>
