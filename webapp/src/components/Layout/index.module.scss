@@ -1,5 +1,6 @@
-@import '../../styles/_mixins.scss';
-@import '../../styles/_vars.scss';
+@use '../../styles/_mixins.scss';
+@use '../../styles/_vars.scss';
+@use '../../../node_modules/include-media/dist/include-media';
 
 $breakpoint: '<=900px';
 
@@ -7,7 +8,7 @@ $breakpoint: '<=900px';
   display: flex;
   flex-flow: row nowrap;
   height: 100%;
-  @include media($breakpoint) {
+  @include include-media.media($breakpoint) {
     flex-flow: column nowrap;
   }
 
@@ -16,12 +17,12 @@ $breakpoint: '<=900px';
     overflow: auto;
     flex: 0 0 200px;
     padding: 20px 30px;
-    border-right: 1px solid $black;
-    @include media($breakpoint) {
+    border-right: 1px solid vars.$black;
+    @include include-media.media($breakpoint) {
       overflow: visible;
       flex: 0 0 auto;
       border-right: none;
-      border-bottom: 1px solid $black;
+      border-bottom: 1px solid vars.$black;
       height: auto;
     }
 
@@ -38,7 +39,7 @@ $breakpoint: '<=900px';
         }
 
         .link {
-          @include link;
+          @include mixins.link;
         }
       }
     }
@@ -49,7 +50,7 @@ $breakpoint: '<=900px';
     overflow: auto;
     flex: 1 1 100%;
     padding: 20px 30px;
-    @include media($breakpoint) {
+    @include include-media.media($breakpoint) {
       overflow: visible;
       flex: 0 0 auto;
       height: auto;

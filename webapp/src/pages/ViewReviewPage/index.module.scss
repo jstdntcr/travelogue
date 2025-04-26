@@ -1,8 +1,8 @@
-@import '../../styles/_mixins.scss';
-@import '../../styles/_vars.scss';
+@use '../../styles/_mixins.scss';
+@use '../../styles/_vars.scss';
 
 .title {
-  @include h1;
+  @include mixins.h1;
   margin-bottom: 2px;
 }
 
