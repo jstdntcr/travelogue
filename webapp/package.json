@@ -11,6 +11,7 @@
     "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts .",
     "stylelint": "stylelint --cache --cache-location ./node_modules/.cache/.stylelintcache 'src/**/*.scss'",
+    "stylecheck": "sass --update -q ./src:./node_modules/.cache/.stylecheckcache",
     "prepare": "husky"
   },
   "dependencies": {
