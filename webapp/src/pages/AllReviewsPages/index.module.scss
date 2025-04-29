@@ -1,10 +1,6 @@
 @use '../../styles/_mixins.scss';
 @use '../../styles/_vars.scss';
 
-.title {
-  @include mixins.h1;
-}
-
 .reviews {
   .review {
     width: 100%;
@@ -15,16 +11,8 @@
       margin-top: 20px;
     }
 
-    .reviewName {
-      @include mixins.h2;
-    }
-
     .reviewLink {
       @include mixins.link;
-    }
-
-    .reviewDescription {
-      font-size: 18px;
     }
   }
 }

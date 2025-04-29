@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import css from './index.module.scss';
+import { Segment } from '../../components/Segment';
 import { getViewReviewRoute } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 
@@ -10,18 +11,17 @@ export const AllReviewsPages = () => {
   if (isError) return <span>Error: {error.message}</span>;
 
   return (
-    <div>
-      <h1 className={css.title}>All Reviews</h1>
+    <Segment title="All reviews">
       <div className={css.reviews}>
         {data?.reviews.map((review) => (
           <div className={css.review} key={review.nick}>
-            <h2 className={css.reviewName}>
-              <Link className={css.reviewLink} to={getViewReviewRoute({ reviewNick: review.nick })}>{review.name}</Link>
-            </h2>
-            <p className={css.reviewDescription}>{review.description}</p>
+            <Segment  
+            title={<Link className={css.reviewLink} to={getViewReviewRoute({ reviewNick: review.nick })}>{review.name}</Link>}
+            size={2}
+            description={review.description}/>
           </div>
         ))}
       </div>
-    </div>
+      </Segment>
   );
 };

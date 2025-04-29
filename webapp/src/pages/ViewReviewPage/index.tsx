@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import css from './index.module.scss';
+import { Segment } from '../../components/Segment';
 import { ViewReviewRouteParams } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 
@@ -13,10 +14,8 @@ export const ViewReviewPage = () => {
   if (!data?.review) return <span>Idea not found</span>;
 
   return (
-    <div>
-      <h1 className={css.title}>{data.review.name}</h1>
-      <p className={css.description}>{data.review.description}</p>
+    <Segment title={data.review.name} description={data.review.description}>
       <div className={css.text} dangerouslySetInnerHTML={{ __html: data.review.text }} />
-    </div>
+    </Segment>
   );
 };
