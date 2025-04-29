@@ -1,6 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
 import css from './index.module.scss';
-import { getAllReviewsRoute } from '../../lib/routes';
+import { getAllReviewsRoute, getNewReviewRoute } from '../../lib/routes';
 
 export const Layout = () => {
   return (
@@ -10,6 +10,9 @@ export const Layout = () => {
             <ul className={css.menu}>
                 <li className={css.item}>
                     <Link to={getAllReviewsRoute()} className={css.link}>All Reviews</Link>
+                </li>
+                <li className={css.item}>
+                    <Link to={getNewReviewRoute()} className={css.link}>Add review</Link>
                 </li>
             </ul>
         </div>
