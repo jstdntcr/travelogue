@@ -1,5 +1,5 @@
-@use '../../styles/_mixins.scss';
-@use '../../styles/_vars.scss';
+@use '../../styles/_mixins';
+@use '../../styles/_vars';
 @use '../../../node_modules/include-media/dist/include-media';
 
 $breakpoint: '<=900px';
