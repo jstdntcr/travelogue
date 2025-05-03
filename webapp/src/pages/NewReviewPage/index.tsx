@@ -4,8 +4,10 @@ import { z } from 'zod';
 import { Input } from '../../components/Input';
 import { Segment } from '../../components/Segment';
 import { Textarea } from '../../components/Textarea';
+import { trpc } from '../../lib/trpc';
 
 export const NewReviewPage = () => {
+  const createReview = trpc.createReview.useMutation();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -24,8 +26,8 @@ export const NewReviewPage = () => {
         text: z.string().min(100, 'Text must be at least 100 characters'),
       })
     ),
-    onSubmit: (values) => {
-      console.info('Submitted', values);
+    onSubmit: async (values) => {
+      await createReview.mutateAsync(values);
     },
   });
 
