@@ -1,6 +1,6 @@
+import { zCreateReviewTrpcInput } from '@travelogue/backend/src/router/createReview/input';
 import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
-import { z } from 'zod';
 import { Input } from '../../components/Input';
 import { Segment } from '../../components/Segment';
 import { Textarea } from '../../components/Textarea';
@@ -15,17 +15,7 @@ export const NewReviewPage = () => {
       description: '',
       text: '',
     },
-    validate: withZodSchema(
-      z.object({
-        name: z.string().min(1, 'Name is required'),
-        nick: z
-          .string()
-          .min(1)
-          .regex(/^[a-z0-9-]+$/, 'Nick can only contain lowercase letters, numbers and dashes'),
-        description: z.string().min(1, 'Description is required'),
-        text: z.string().min(100, 'Text must be at least 100 characters'),
-      })
-    ),
+    validate: withZodSchema(zCreateReviewTrpcInput),
     onSubmit: async (values) => {
       await createReview.mutateAsync(values);
     },
