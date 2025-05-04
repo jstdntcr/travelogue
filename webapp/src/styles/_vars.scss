@@ -2,10 +2,12 @@ $white: #fff;
 $black: #000;
 $blue: #00c;
 $red: #c00;
+$mainBackgroundColor: #f2f8ff;
+$textColor: #000000;
 
-$defaultFontFamily: 'Helvetica', 'Arial', sans-serif;
+$defaultFontFamily: 'Montserrat', sans-serif;
 $defaultFontSize: 14px;
-$defaultBackgroundColor: $white;
-$defaultTextColor: $black;
+$defaultBackgroundColor: $mainBackgroundColor;
+$defaultTextColor: $textColor;
 $defaultLineHeight: 1.2;
 $borderRadiusSmall: 3px;

@@ -4,6 +4,7 @@ import { withZodSchema } from 'formik-validator-zod';
 import { useState } from 'react';
 import { Alert } from '../../components/Alert';
 import { Button } from '../../components/Button';
+import { FormItems } from '../../components/FormItems';
 import { Input } from '../../components/Input';
 import { Segment } from '../../components/Segment';
 import { Textarea } from '../../components/Textarea';
@@ -46,6 +47,7 @@ export const NewReviewPage = () => {
           formik.handleSubmit();
         }}
       >
+        <FormItems>
         <Input name="name" label="Name" formik={formik} />
         <Input name="nick" label="Nick" formik={formik} />
         <Input name="description" label="Description" formik={formik} maxWidth={500} />
@@ -55,6 +57,7 @@ export const NewReviewPage = () => {
         {successMessageVisible && <Alert color="green">Review created successfully</Alert>}
 
         <Button loading={formik.isSubmitting}>Create review</Button>
+        </FormItems>
       </form>
     </Segment>
   );

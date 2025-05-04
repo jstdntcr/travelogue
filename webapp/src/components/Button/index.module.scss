@@ -3,6 +3,8 @@
 
 .button {
   padding: 8px 15px;
+  font-family: vars.$defaultFontFamily;
+  font-weight: 800;
   color: vars.$white;
   background-color: #0a980a;
   border: none;

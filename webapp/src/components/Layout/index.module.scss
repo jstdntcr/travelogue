@@ -40,6 +40,7 @@ $breakpoint: '<=900px';
 
         .link {
           @include mixins.link;
+          font-weight: 600;
         }
       }
     }
