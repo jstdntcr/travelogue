@@ -1,12 +1,14 @@
 import { zCreateReviewTrpcInput } from '@travelogue/backend/src/router/createReview/input';
 import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
+import { useState } from 'react';
 import { Input } from '../../components/Input';
 import { Segment } from '../../components/Segment';
 import { Textarea } from '../../components/Textarea';
 import { trpc } from '../../lib/trpc';
 
 export const NewReviewPage = () => {
+  const [successMessageVisible, setSuccessMessageVisibe] = useState(false);
   const createReview = trpc.createReview.useMutation();
   const formik = useFormik({
     initialValues: {
@@ -18,6 +20,11 @@ export const NewReviewPage = () => {
     validate: withZodSchema(zCreateReviewTrpcInput),
     onSubmit: async (values) => {
       await createReview.mutateAsync(values);
+      formik.resetForm();
+      setSuccessMessageVisibe(true);
+      setTimeout(() => {
+        setSuccessMessageVisibe(false);
+      }, 3000);
     },
   });
 
@@ -34,6 +41,7 @@ export const NewReviewPage = () => {
         <Input name="description" label="Description" formik={formik} />
         <Textarea name="text" label="Text" formik={formik} />
         {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Some fields are invalid</div>}
+        {successMessageVisible && <div style={{ color: 'green' }}>Review created successfully</div>}
 
         <button type="submit" disabled={formik.isSubmitting}>
           {formik.isSubmitting ? 'Submitting...' : 'Create review'}
