@@ -21,5 +21,22 @@ export default tseslint.config({
   rules: {
     ...reactHooks.configs.recommended.rules,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    '@typescript-eslint/no-restricted-imports': [
+      'error',
+      {
+        patterns: [
+          {
+            group: [
+              '@travelogue/backend/**',
+              '!@travelogue/backend/**/',
+              '!@travelogue/backend/**/input',
+            ],
+            allowTypeImports: true,
+            message:
+              'Only types and input schemas are allowed to be imported from backend workspace',
+          },
+        ],
+      },
+    ],
   },
 })
