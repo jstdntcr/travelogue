@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
 import { useState } from 'react';
 import { Alert } from '../../components/Alert';
+import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { Segment } from '../../components/Segment';
 import { Textarea } from '../../components/Textarea';
@@ -50,14 +51,10 @@ export const NewReviewPage = () => {
         <Input name="description" label="Description" formik={formik} maxWidth={500} />
         <Textarea name="text" label="Text" formik={formik} />
         {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Some fields are invalid</div>}
-        {/* {!!submittingError && <div style={{ color: 'red' }}>{submittingError}</div>} */}
         {!!submittingError && <Alert color="red">{submittingError}</Alert>}
-        {/* {successMessageVisible && <div style={{ color: 'green' }}>Review created successfully</div>} */}
         {successMessageVisible && <Alert color="green">Review created successfully</Alert>}
 
-        <button type="submit" disabled={formik.isSubmitting}>
-          {formik.isSubmitting ? 'Submitting...' : 'Create review'}
-        </button>
+        <Button loading={formik.isSubmitting}>Create review</Button>
       </form>
     </Segment>
   );
