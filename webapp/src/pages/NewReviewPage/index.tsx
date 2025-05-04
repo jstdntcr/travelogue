@@ -9,6 +9,7 @@ import { trpc } from '../../lib/trpc';
 
 export const NewReviewPage = () => {
   const [successMessageVisible, setSuccessMessageVisibe] = useState(false);
+  const [submittingError, setSubmittingError] = useState<string | null>(null);
   const createReview = trpc.createReview.useMutation();
   const formik = useFormik({
     initialValues: {
@@ -19,12 +20,19 @@ export const NewReviewPage = () => {
     },
     validate: withZodSchema(zCreateReviewTrpcInput),
     onSubmit: async (values) => {
-      await createReview.mutateAsync(values);
-      formik.resetForm();
-      setSuccessMessageVisibe(true);
-      setTimeout(() => {
-        setSuccessMessageVisibe(false);
-      }, 3000);
+      try {
+        await createReview.mutateAsync(values);
+        formik.resetForm();
+        setSuccessMessageVisibe(true);
+        setTimeout(() => {
+          setSuccessMessageVisibe(false);
+        }, 3000);
+      } catch (error: any) {
+        setSubmittingError(error.message);
+        setTimeout(() => {
+          setSubmittingError(null);
+        }, 3000);
+      }
     },
   });
 
@@ -41,6 +49,7 @@ export const NewReviewPage = () => {
         <Input name="description" label="Description" formik={formik} />
         <Textarea name="text" label="Text" formik={formik} />
         {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Some fields are invalid</div>}
+        {!!submittingError && <div style={{ color: 'red' }}>{submittingError}</div>}
         {successMessageVisible && <div style={{ color: 'green' }}>Review created successfully</div>}
 
         <button type="submit" disabled={formik.isSubmitting}>
