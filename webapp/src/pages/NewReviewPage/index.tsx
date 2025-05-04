@@ -35,7 +35,9 @@ export const NewReviewPage = () => {
         <Textarea name="text" label="Text" formik={formik} />
         {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Some fields are invalid</div>}
 
-        <button type="submit">Create Review</button>
+        <button type="submit" disabled={formik.isSubmitting}>
+          {formik.isSubmitting ? 'Submitting...' : 'Create review'}
+        </button>
       </form>
     </Segment>
   );
