@@ -3,6 +3,7 @@
 
 .text {
   font-style: 14px;
+  word-wrap: break-word;
 
   & > *:not(:first-child) {
     margin-top: 20px;
