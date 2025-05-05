@@ -1,11 +1,18 @@
 import { zCreateReviewTrpcInput } from './input';
-import { reviews } from '../../lib/reviews';
 import { trpc } from '../../lib/trpc';
 
-export const createReviewTrpcRoute = trpc.procedure.input(zCreateReviewTrpcInput).mutation(({ input }) => {
-  if (reviews.find((review) => review.nick === input.nick)) {
+export const createReviewTrpcRoute = trpc.procedure.input(zCreateReviewTrpcInput).mutation(async ({ input, ctx }) => {
+  const exReview = await ctx.prisma.review.findUnique({
+    where: {
+      nick: input.nick,
+    },
+  });
+  if (exReview) {
     throw Error('Review with this nick already exists');
   }
-  reviews.unshift(input);
+  await ctx.prisma.review.create({
+    data: input,
+  });
+
   return true;
 });
