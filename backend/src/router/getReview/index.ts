@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { reviews } from '../../lib/reviews';
 import { trpc } from '../../lib/trpc';
 
 export const getReviewTrpcRoute = trpc.procedure
@@ -8,7 +7,13 @@ export const getReviewTrpcRoute = trpc.procedure
       reviewNick: z.string(),
     })
   )
-  .query(({ input }) => {
-    const review = reviews.find((review) => review.nick === input.reviewNick);
-    return { review: review || null };
+  .query(async ({ input, ctx }) => {
+    const review = await ctx.prisma.review.findUnique({
+      where: {
+        nick: input.reviewNick,
+      },
+    });
+    return { review };
+    // const review = reviews.find((review) => review.nick === input.reviewNick);
+    // return { review: review || null };
   });
