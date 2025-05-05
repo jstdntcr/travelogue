@@ -1,3 +1,4 @@
+import {format} from 'date-fns';
 import { useParams } from 'react-router-dom';
 import css from './index.module.scss';
 import { Segment } from '../../components/Segment';
@@ -15,6 +16,7 @@ export const ViewReviewPage = () => {
 
   return (
     <Segment title={data.review.name} description={data.review.description}>
+      <div className={css.createdAt}>Created At: {format(data.review.createdAt, 'dd-MM-yyyy')}</div>
       <div className={css.text} dangerouslySetInnerHTML={{ __html: data.review.text }} />
     </Segment>
   );
