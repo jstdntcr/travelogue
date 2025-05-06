@@ -13,7 +13,7 @@ void (async () => {
     const PORT = 3000;
 
     expressApp.use(cors());
-    applyTrpcToExpressApp(expressApp, ctx, trpcRouter);
+    await applyTrpcToExpressApp(expressApp, ctx, trpcRouter);
     expressApp.listen(PORT, () => {
       console.info(`Server is running on port http://localhost:${PORT}`);
     });
