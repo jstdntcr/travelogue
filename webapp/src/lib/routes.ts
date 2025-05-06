@@ -9,3 +9,4 @@ export type ViewReviewRouteParams = typeof viewReviewRouteParams;
 export const getViewReviewRoute = ({ reviewNick }: ViewReviewRouteParams) => `/reviews/${reviewNick}`;
 
 export const getNewReviewRoute = () => '/reviews/new';
+export const getSignUpRoute = () => '/sign-up';

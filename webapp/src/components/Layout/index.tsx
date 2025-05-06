@@ -1,6 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
 import css from './index.module.scss';
-import { getAllReviewsRoute, getNewReviewRoute } from '../../lib/routes';
+import { getAllReviewsRoute, getNewReviewRoute, getSignUpRoute } from '../../lib/routes';
 
 export const Layout = () => {
   return (
@@ -13,6 +13,9 @@ export const Layout = () => {
                 </li>
                 <li className={css.item}>
                     <Link to={getNewReviewRoute()} className={css.link}>Add review</Link>
+                </li>
+                <li className={css.item}>
+                    <Link to={getSignUpRoute()} className={css.link}>Sign Up</Link>
                 </li>
             </ul>
         </div>

@@ -48,15 +48,15 @@ export const NewReviewPage = () => {
         }}
       >
         <FormItems>
-        <Input name="name" label="Name" formik={formik} />
-        <Input name="nick" label="Nick" formik={formik} />
-        <Input name="description" label="Description" formik={formik} maxWidth={500} />
-        <Textarea name="text" label="Text" formik={formik} />
-        {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Some fields are invalid</div>}
-        {!!submittingError && <Alert color="red">{submittingError}</Alert>}
-        {successMessageVisible && <Alert color="green">Review created successfully</Alert>}
+          <Input name="name" label="Name" formik={formik} />
+          <Input name="nick" label="Nick" formik={formik} />
+          <Input name="description" label="Description" formik={formik} maxWidth={500} />
+          <Textarea name="text" label="Text" formik={formik} />
+          {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Some fields are invalid</div>}
+          {!!submittingError && <Alert color="red">{submittingError}</Alert>}
+          {successMessageVisible && <Alert color="green">Review created successfully</Alert>}
 
-        <Button loading={formik.isSubmitting}>Create review</Button>
+          <Button loading={formik.isSubmitting}>Create review</Button>
         </FormItems>
       </form>
     </Segment>
