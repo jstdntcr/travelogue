@@ -13,7 +13,7 @@ export const App = () => {
     <TRPCProvider>
       <BrowserRouter>
         <Routes>
-            <Route element={<Layout />}>
+          <Route element={<Layout />}>
             <Route path={routes.getSignUpRoute()} element={<SignUpPage />}></Route>
             <Route path={routes.getAllReviewsRoute()} element={<AllReviewsPages />} />
             <Route path={routes.getNewReviewRoute()} element={<NewReviewPage />} />

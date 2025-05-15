@@ -14,6 +14,7 @@ void (async () => {
 
     expressApp.use(cors());
     await applyTrpcToExpressApp(expressApp, ctx, trpcRouter);
+
     expressApp.listen(PORT, () => {
       console.info(`Server is running on port http://localhost:${PORT}`);
     });
