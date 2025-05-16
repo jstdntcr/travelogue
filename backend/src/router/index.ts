@@ -2,6 +2,7 @@
 import { createReviewTrpcRoute } from './createReview';
 import { getReviewTrpcRoute } from './getReview';
 import { getReviewsTrpcRoute } from './getReviews';
+import { signInTrpcRoute } from './signIn';
 import { signUpTrpcRoute } from './signUp';
 // @endindex
 import { trpc } from '../lib/trpc';
@@ -11,6 +12,7 @@ export const trpcRouter = trpc.router({
   createReview: createReviewTrpcRoute,
   getReview: getReviewTrpcRoute,
   getReviews: getReviewsTrpcRoute,
+  signIn: signInTrpcRoute,
   signUp: signUpTrpcRoute,
   // @endindex
 });
