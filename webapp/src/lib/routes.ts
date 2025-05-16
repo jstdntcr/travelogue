@@ -9,3 +9,4 @@ export const getViewReviewRoute = ({ reviewNick }: ViewReviewRouteParams) => `/r
 export const getAllReviewsRoute = () => '/';
 export const getNewReviewRoute = () => '/reviews/new';
 export const getSignUpRoute = () => '/sign-up';
+export const getSignInRoute = () => '/sign-in';
