@@ -45,6 +45,7 @@ export default [
       'import/named': 'error', // Enforce sorting of named imports (e.g., import { b, a } -> import { a, b })
       'no-console': ['error', { allow: ['error', 'info', 'warn'] }],
       '@/no-process-env': 'error',
+      'no-restricted-syntax': ['error', {selector: '[object.type=MetaProperty][property.name=env]', message: 'Use instead import {env} from "lib/env"'}]
     },
   },
 ];
