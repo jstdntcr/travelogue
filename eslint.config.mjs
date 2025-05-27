@@ -14,6 +14,7 @@ export default [
     },
     plugins: {
       import: importPlugin,
+      'node': importPlugin,
       '@typescript-eslint': tsPlugin,
     },
     rules: {
@@ -43,6 +44,7 @@ export default [
       ],
       'import/named': 'error', // Enforce sorting of named imports (e.g., import { b, a } -> import { a, b })
       'no-console': ['error', { allow: ['error', 'info', 'warn'] }],
+      '@/no-process-env': 'error',
     },
   },
 ];

@@ -2,6 +2,7 @@ import { Express } from 'express';
 import { Passport } from 'passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { AppContext } from './ctx';
+import { env } from './env';
 
 // middleware for passport
 export const applyPassportToExpressApp = (expressApp: Express, ctx: AppContext): void => {
@@ -10,7 +11,7 @@ export const applyPassportToExpressApp = (expressApp: Express, ctx: AppContext):
   passport.use(
     new Strategy(
       {
-        secretOrKey: 'not-really-secret-jwt-key',
+        secretOrKey: env.JWT_SECRET,
         jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
       },
       (jwtPayLoad: string, done: any) => {
