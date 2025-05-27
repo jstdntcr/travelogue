@@ -21,7 +21,7 @@ const trpcClient = trpc.createClient({
     httpBatchLink({
       url: env.VITE_BACKEND_TRPC_URL,
       headers: () => {
-        const token = Cookies.get('token');
+        const token = Cookies.get('token-travelogue');
         return {
           ...(token && { authorization: `Bearer ${token}` }),
         };

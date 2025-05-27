@@ -27,7 +27,7 @@ export const SignInPage = () => {
       try {
         setSubmittingError(null);
         const { token } = await signIn.mutateAsync(values);
-        Cookies.set('token', token, { expires: 999999 });
+        Cookies.set('token-travelogue', token, { expires: 999999 });
         void trpcUtils.invalidate();
         navigate(getAllReviewsRoute());
       } catch (err: any) {
