@@ -26,6 +26,7 @@ export const applyTrpcToExpressApp = async (expressApp: Express, appContext: App
     })
   );
 
+  // trpc-playground
   expressApp.use(
     '/trpc-playground',
     await expressHandler({

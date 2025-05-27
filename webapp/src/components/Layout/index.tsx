@@ -32,7 +32,7 @@ export const Layout = () => {
               </li>
               <li className={css.item}>
                 <Link to={getSignOutRoute()} className={css.link}>
-                  Log Out
+                  Log Out ({data.me.nick})
                 </Link>
               </li>
             </>
