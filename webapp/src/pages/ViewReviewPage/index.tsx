@@ -17,6 +17,7 @@ export const ViewReviewPage = () => {
   return (
     <Segment title={data.review.name} description={data.review.description}>
       <div className={css.createdAt}>Created At: {format(data.review.createdAt, 'dd-MM-yyyy')}</div>
+      <div className={css.author}>Author: {data.review.author.nick}</div>
       <div className={css.text} dangerouslySetInnerHTML={{ __html: data.review.text }} />
     </Segment>
   );

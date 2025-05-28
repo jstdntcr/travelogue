@@ -12,8 +12,14 @@ export const getReviewTrpcRoute = trpc.procedure
       where: {
         nick: input.reviewNick,
       },
+      include: {
+        author: {
+          select: {
+            id: true,
+            nick: true,
+          },
+        },
+      },
     });
     return { review };
-    // const review = reviews.find((review) => review.nick === input.reviewNick);
-    // return { review: review || null };
   });
