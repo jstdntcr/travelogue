@@ -1,24 +1,37 @@
 import {format} from 'date-fns';
 import { useParams } from 'react-router-dom';
 import css from './index.module.scss';
+import { LinkButton } from '../../components/Button';
 import { Segment } from '../../components/Segment';
 import { ViewReviewRouteParams } from '../../lib/routes';
+import { getUpdateReviewRoute } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 
 export const ViewReviewPage = () => {
   const { reviewNick } = useParams() as ViewReviewRouteParams;
 
-  const { data, error, isLoading, isFetching, isError } = trpc.getReview.useQuery({ reviewNick });
+  const getReviewResult = trpc.getReview.useQuery({reviewNick: reviewNick});
+  const getMeResult = trpc.getMe.useQuery();
 
-  if (isLoading || isFetching) return <span>Loading...</span>;
-  if (isError) return <span>Error: {error.message}</span>;
-  if (!data?.review) return <span>Idea not found</span>;
+  if (getReviewResult.isLoading || getReviewResult.isFetching || getMeResult.isLoading || getMeResult.isFetching) return <span>Loading...</span>;
+  if (getReviewResult.isError) return <span>Error: {getReviewResult.error.message}</span>;
+  if (getMeResult.isError) return <span>Error: {getMeResult.error.message}</span>;
+
+  if (!getReviewResult.data?.review) return <span>Idea not found</span>;
+
+  const review = getReviewResult.data.review;   
+  const me = getMeResult.data?.me;
 
   return (
-    <Segment title={data.review.name} description={data.review.description}>
-      <div className={css.createdAt}>Created At: {format(data.review.createdAt, 'dd-MM-yyyy')}</div>
-      <div className={css.author}>Author: {data.review.author.nick}</div>
-      <div className={css.text} dangerouslySetInnerHTML={{ __html: data.review.text }} />
+    <Segment title={review.name} description={getReviewResult.data.review.description}>
+      <div className={css.createdAt}>Created At: {format(review.createdAt, 'dd-MM-yyyy')}</div>
+      <div className={css.author}>Author: {review.author.nick}</div>
+      <div className={css.text} dangerouslySetInnerHTML={{ __html: review.text }} />
+      {review.authorId === me?.id && 
+        <div className={css.updateButton}>
+          <LinkButton to={getUpdateReviewRoute({reviewNick: review.nick})}>Update Review</LinkButton>
+        </div>
+      }
     </Segment>
   );
 };
