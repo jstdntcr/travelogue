@@ -1,10 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { TrpcRouterOutput } from '@travelogue/backend/src/router';
 import { zUpdateReviewTrpcInput } from '@travelogue/backend/src/router/updateReview/input';
-import { useFormik } from 'formik';
-import { withZodSchema } from 'formik-validator-zod';
 import _ from 'lodash';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { Alert } from '../../components/Alert';
@@ -13,26 +10,23 @@ import { FormItems } from '../../components/FormItems';
 import { Input } from '../../components/Input';
 import { Segment } from '../../components/Segment';
 import { Textarea } from '../../components/Textarea';
+import { useForm } from '../../lib/form';
 import { UpdateReviewRouterParams } from '../../lib/routes';
 import { getViewReviewRoute } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 
 const UpdateReviewComponent = ({ review }: { review: NonNullable<TrpcRouterOutput['getReview']['review']> }) => {
-  const [submittingError, setSubmittingError] = useState<string | null>(null);
   const navigate = useNavigate();
   const updateReview = trpc.updateReview.useMutation();
-  const formik = useFormik({
+  const { formik, buttonProps, alertProps } = useForm({
     initialValues: _.pick(review, ['nick', 'name', 'description', 'text']),
-    validate: withZodSchema(zUpdateReviewTrpcInput.omit({ reviewId: true })),
+    validationSchema: zUpdateReviewTrpcInput.omit({ reviewId: true }),
     onSubmit: async (values) => {
-      try {
-        setSubmittingError(null);
-        await updateReview.mutateAsync({ reviewId: review.id, ...values });
-        navigate(getViewReviewRoute({ reviewNick: values.nick }));
-      } catch (error: any) {
-        setSubmittingError(error.message);
-      }
+      await updateReview.mutateAsync({ reviewId: review.id, ...values });
+      navigate(getViewReviewRoute({ reviewNick: values.nick }));
     },
+    resetOnSuccess: false,
+    showValidationAlert: true,
   });
 
   return (
@@ -43,9 +37,8 @@ const UpdateReviewComponent = ({ review }: { review: NonNullable<TrpcRouterOutpu
           <Input label="Nick" name="nick" formik={formik}></Input>
           <Input label="Description" name="description" formik={formik} maxWidth={500}></Input>
           <Textarea label="Text" name="text" formik={formik}></Textarea>
-          {!formik.isValid && !!formik.submitCount && <Alert color="red">Some fields are invalid</Alert>}
-          {!!submittingError && <Alert color="red">{submittingError}</Alert>}
-          <Button loading={formik.isSubmitting}>Update review</Button>
+          <Alert {...alertProps} />
+          <Button {...buttonProps}>Update Review</Button>
         </FormItems>
       </form>
     </Segment>
