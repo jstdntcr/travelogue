@@ -73,7 +73,7 @@ export const useForm = <TZodSchema extends z.ZodTypeAny>({
       children: null,
       hidden: true,
     };
-  }, [successMessageVisible, submittingError, formik.isValid, showValidationAlert, successMessage]);
+  }, [successMessageVisible, submittingError, formik.isValid, showValidationAlert, successMessage, formik.submitCount]);
 
   const buttonProps = useMemo<Omit<ButtonProps, 'children'>>(() => {
     return { loading: formik.isSubmitting };
