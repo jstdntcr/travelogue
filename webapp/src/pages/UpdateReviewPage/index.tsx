@@ -10,6 +10,7 @@ import { FormItems } from '../../components/FormItems';
 import { Input } from '../../components/Input';
 import { Segment } from '../../components/Segment';
 import { Textarea } from '../../components/Textarea';
+import { useMe } from '../../lib/ctx';
 import { useForm } from '../../lib/form';
 import { UpdateReviewRouterParams } from '../../lib/routes';
 import { getViewReviewRoute } from '../../lib/routes';
@@ -52,17 +53,14 @@ export const UpdateReviewPage = () => {
     reviewNick,
   });
 
-  const getMeResult = trpc.getMe.useQuery();
+  const me = useMe();
 
-  if (getReviewResult.isLoading || getReviewResult.isFetching || getMeResult.isLoading || getMeResult.isFetching)
-    return <span>Loading...</span>;
+  if (getReviewResult.isLoading || getReviewResult.isFetching) return <span>Loading...</span>;
   if (getReviewResult.isError) return <span>Error: {getReviewResult.error.message}</span>;
-  if (getMeResult.isError) return <span>Error: {getMeResult.error.message}</span>;
 
   if (!getReviewResult.data?.review) return <span>Idea not found</span>;
 
   const review = getReviewResult.data.review;
-  const me = getMeResult.data?.me;
 
   if (!me) return <span>You are not logged in</span>;
 

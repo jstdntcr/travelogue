@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import { AppContextProvider } from './lib/ctx';
 import * as routes from './lib/routes';
 import { TRPCProvider } from './lib/trpc';
 import { AllReviewsPages } from './pages/AllReviewsPages';
@@ -14,19 +15,24 @@ import './styles/global.scss';
 export const App = () => {
   return (
     <TRPCProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
-          <Route element={<Layout />}>
-            <Route path={routes.getSignUpRoute()} element={<SignUpPage />}></Route>
-            <Route path={routes.getSignInRoute()} element={<SignInPage />}></Route>
-            <Route path={routes.getAllReviewsRoute()} element={<AllReviewsPages />} />
-            <Route path={routes.getNewReviewRoute()} element={<NewReviewPage />} />
-            <Route path={routes.getViewReviewRoute(routes.viewReviewRouteParams)} element={<ViewReviewPage />} />
-            <Route path={routes.getUpdateReviewRoute(routes.updateReviewRouteParams)} element={<UpdateReviewPage/>}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AppContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
+            <Route element={<Layout />}>
+              <Route path={routes.getSignUpRoute()} element={<SignUpPage />}></Route>
+              <Route path={routes.getSignInRoute()} element={<SignInPage />}></Route>
+              <Route path={routes.getAllReviewsRoute()} element={<AllReviewsPages />} />
+              <Route path={routes.getNewReviewRoute()} element={<NewReviewPage />} />
+              <Route path={routes.getViewReviewRoute(routes.viewReviewRouteParams)} element={<ViewReviewPage />} />
+              <Route
+                path={routes.getUpdateReviewRoute(routes.updateReviewRouteParams)}
+                element={<UpdateReviewPage />}
+              ></Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AppContextProvider>
     </TRPCProvider>
   );
 };
